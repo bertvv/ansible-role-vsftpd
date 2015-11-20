@@ -3,5 +3,6 @@
 
 vsftpd_packages:
   - vsftpd
+  - libsemanage-python
 
 vsftpd_service: vsftpd
