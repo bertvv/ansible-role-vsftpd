@@ -7,6 +7,7 @@ vsftpd_listen: YES
 vsftpd_listen_ipv6: NO
 vsftpd_local_enable: NO
 vsftpd_local_umask: '022'
+vsftpd_setype: public_content_t
 vsftpd_syslog_enable: YES
 vsftpd_write_enable: YES
 

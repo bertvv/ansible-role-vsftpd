@@ -28,6 +28,10 @@
   file:
     path: '{{ vsftpd_anon_root }}'
     state: directory
+    owner: root
+    group: ftp
+    mode: '0775'
+    setype: '{{ vsftpd_setype }}'
   when: vsftpd_anon_root is defined
   tags: vsftpd
 
@@ -35,12 +39,16 @@
   file:
     path: '{{ vsftpd_local_root }}'
     state: directory
+    owner: root
+    group: ftp
+    mode: '0775'
+    setype: '{{ vsftpd_setype }}'
   when: vsftpd_local_root is defined
   tags: vsftpd
 
 - name: Install configuration file
   template:
-    src: etc_vsftpd_vsftpd.conf.j2
+    src:   etc_vsftpd_vsftpd.conf.j2
     dest: /etc/vsftpd/vsftpd.conf
     owner: root
     group: root
