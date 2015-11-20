@@ -8,6 +8,5 @@ vsftpd_listen_ipv6: NO
 vsftpd_local_enable: NO
 vsftpd_local_umask: '022'
 vsftpd_syslog_enable: YES
-vsftpd_userlist_deny: YES
 vsftpd_write_enable: YES
 
