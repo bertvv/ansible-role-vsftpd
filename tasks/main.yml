@@ -3,14 +3,14 @@
 
 - name: Install packages
   yum:
-    pkg: "{{ item }}"
+    pkg: '{{ item }}'
     state: installed
   with_items: vsftpd_packages
   tags: vsftpd
 
 - name: Set SELinux booleans
   seboolean:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: yes
     persistent: yes
   with_items:
@@ -19,9 +19,23 @@
 
 - name: Ensure service is started
   service:
-    name: "{{ vsftpd_service }}"
+    name: '{{ vsftpd_service }}'
     state: started
     enabled: true
+  tags: vsftpd
+
+- name: Ensure `anon_root` exists
+  file:
+    path: '{{ vsftpd_anon_root }}'
+    state: directory
+  when: vsftpd_anon_root is defined
+  tags: vsftpd
+
+- name: Ensure `local_root` exists
+  file:
+    path: '{{ vsftpd_local_root }}'
+    state: directory
+  when: vsftpd_local_root is defined
   tags: vsftpd
 
 - name: Install configuration file
