@@ -1,0 +1,16 @@
+# roles/vsftpd/tasks/main.yml
+---
+
+- name: Install packages
+  yum:
+    pkg: "{{ item }}"
+    state: installed
+  with_items: vsftpd_packages
+  tags: vsftpd
+
+- name: Ensure service is started
+  service:
+    name: "{{ vsftpd_service }}"
+    state: started
+    enabled: true
+  tags: vsftpd

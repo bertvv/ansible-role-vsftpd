@@ -1,0 +1,7 @@
+# roles/vsftpd/vars/main.yml
+---
+
+vsftpd_packages:
+  - vsftpd
+
+vsftpd_service: vsftpdd

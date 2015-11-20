@@ -1,0 +1,7 @@
+# roles/vsftpd/handlers/main.yml
+---
+
+- name: restart vsftpd
+  service:
+    name: vsftpdd
+    state: restarted
