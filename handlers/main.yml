@@ -3,5 +3,5 @@
 
 - name: restart vsftpd
   service:
-    name: vsftpdd
+    name: "{{ vsftpd_service }}"
     state: restarted

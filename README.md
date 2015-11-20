@@ -1,8 +1,14 @@
 # Ansible role `vsftpd`
 
-An Ansible role for PURPOSE. Specifically, the responsibilities of this role are to:
+An Ansible role for setting up Vsftpd under CentOS/RHEL 7. Specifically, the responsibilities of this role are to:
 
--
+- install necessary packages
+- manage configuration
+- manage SELinux settings
+
+The following are out of the scope of this role:
+
+- configuring the firewall
 
 ## Requirements
 

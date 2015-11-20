@@ -4,4 +4,4 @@
 vsftpd_packages:
   - vsftpd
 
-vsftpd_service: vsftpdd
+vsftpd_service: vsftpd

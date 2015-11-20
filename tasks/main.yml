@@ -8,9 +8,29 @@
   with_items: vsftpd_packages
   tags: vsftpd
 
+- name: Set SELinux booleans
+  seboolean:
+    name: "{{ item }}"
+    state: yes
+    persistent: yes
+  with_items:
+    - ftp_home_dir
+    - ftpd_full_access
+
 - name: Ensure service is started
   service:
     name: "{{ vsftpd_service }}"
     state: started
     enabled: true
+  tags: vsftpd
+
+- name: Install configuration file
+  template:
+    src: etc_vsftpd_vsftpd.conf.j2
+    dest: /etc/vsftpd/vsftpd.conf
+    owner: root
+    group: root
+    mode: 0600
+    setype: etc_t
+  notify: restart vsftpd
   tags: vsftpd
