@@ -5,16 +5,16 @@
 # General settings
 #
 
-connect_from_port_20={{ vsftpd_connect_from_port_20 }}
-listen={{ vsftpd_listen }}
-listen_ipv6={{ vsftpd_listen_ipv6 }}
+connect_from_port_20={{ 'YES' if vsftpd_connect_from_port_20 else 'NO' }}
+listen={{ 'YES' if vsftpd_listen else 'NO' }}
+listen_ipv6={{ 'YES' if vsftpd_listen_ipv6 else 'NO' }}
 pam_service_name={{ vsftpd_service }}
-syslog_enable={{ vsftpd_syslog_enable }}
+syslog_enable={{ 'YES' if vsftpd_syslog_enable else 'NO' }}
 
 #
 # Access control for anonymous users
 #
-anonymous_enable={{ vsftpd_anonymous_enable }}
+anonymous_enable={{ 'YES' if vsftpd_anonymous_enable else 'NO' }}
 {% if vsftpd_anon_root is defined %}
 anon_root={{ vsftpd_anon_root }}
 {% endif %}
@@ -22,13 +22,13 @@ anon_root={{ vsftpd_anon_root }}
 #
 # Access control for registered users
 #
-local_enable={{ vsftpd_local_enable }}
+local_enable={{ 'YES' if vsftpd_local_enable else 'NO' }}
 {% if vsftpd_local_root is defined %}
 local_root={{ vsftpd_local_root }}
 {% endif %}
 local_umask={{ vsftpd_local_umask }}
 
-write_enable={{ vsftpd_write_enable }}
+write_enable={{ 'YES' if vsftpd_write_enable else 'NO' }}
 
 {% if vsftpd_config is defined %}
 #
