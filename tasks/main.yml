@@ -1,6 +1,11 @@
 # roles/vsftpd/tasks/main.yml
 ---
 
+- name: Ensure `listen` and `listen_ipv6` are mutually exclusive
+  assert:
+    that: "vsftpd_listen != vsftpd_listen_ipv6"
+  tags: vsftpd
+
 - name: Install packages
   yum:
     pkg: '{{ item }}'
@@ -16,6 +21,7 @@
   with_items:
     - ftp_home_dir
     - ftpd_full_access
+  tags: vsftpd
 
 - name: Ensure service is started
   service:
