@@ -34,7 +34,7 @@ write_enable={{ 'YES' if vsftpd_write_enable else 'NO' }}
 #
 # Custom settings
 #
-{% for key, value in vsftpd_config.iteritems() %}
-{{ key }}={{ value }}
+{% for setting in vsftpd_options %}
+{{ setting.key }}={{ setting.value }}
 {% endfor %}
 {% endif %}
