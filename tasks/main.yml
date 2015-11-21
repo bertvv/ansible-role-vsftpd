@@ -29,7 +29,7 @@
     path: '{{ vsftpd_anon_root }}'
     state: directory
     owner: root
-    group: ftp
+    group: root
     mode: '0775'
     setype: '{{ vsftpd_setype }}'
   when: vsftpd_anon_root is defined
@@ -40,7 +40,7 @@
     path: '{{ vsftpd_local_root }}'
     state: directory
     owner: root
-    group: ftp
+    group: root
     mode: '0775'
     setype: '{{ vsftpd_setype }}'
   when: vsftpd_local_root is defined
@@ -52,7 +52,7 @@
     dest: /etc/vsftpd/vsftpd.conf
     owner: root
     group: root
-    mode: 0600
+    mode: '0600'
     setype: etc_t
   notify: restart vsftpd
   tags: vsftpd
