@@ -21,17 +21,26 @@ Please refer to the [vsftpd.conf(5)](http://vsftpd.beasts.org/vsftpd_conf.html) 
 | Variable                      | Default | Comments (type)                                                                             |
 | :---                          | :---    | :---                                                                                        |
 | `vsftpd_anon_root`            | -       | Directory for guest users. Defaults to home directory of the `ftp` user.                    |
-| `vsftpd_anonymous_enable`     | YES     | Specifies whether anonymous logins are permitted or not.                                    |
+| `vsftpd_anonymous_enable`     | true    | Specifies whether anonymous logins are permitted or not.                                    |
 | `vsftpd_config`               | -       | List of dicts for other options not available as role variables. See below.                 |
-| `vsftpd_connect_from_port_20` | YES     | Controls whether PORT style data connections use port 20 on the server. machine.            |
-| `vsftpd_listen`               | YES     | When enabled, run `vsftpd` in standalone mode. Mutually exclusive with `vsftpd_listen_ipv6` |
-| `vsftpd_listen_ipv6`          | NO      | When enabled, run `vsftpd` in standalone mode, over IPv6.                                   |
-| `vsftpd_local_enable`         | NO      | Specifies whether logins from registered users are permitted or not.                        |
+| `vsftpd_connect_from_port_20` | true    | Controls whether PORT style data connections use port 20 on the server. machine.            |
+| `vsftpd_listen`               | true    | When enabled, run `vsftpd` in standalone mode. Mutually exclusive with `vsftpd_listen_ipv6` |
+| `vsftpd_listen_ipv6`          | false   | When enabled, run `vsftpd` in standalone mode, over IPv6.                                   |
+| `vsftpd_local_enable`         | false   | Specifies whether logins from registered users are permitted or not.                        |
 | `vsftpd_local_root`           | -       | Directory for registered users. Defaults to their home directory.                           |
 | `vsftpd_local_umask`          | 022     | The value that the umask for file creation is set to for local users.                       |
-| `vsftpd_syslog_enable`        | YES     | If enabled, log output goes to the system log (`journalctl -u vsftpd.service`)              |
-| `vsftpd_write_enable`         | YES     | Controls whether any FTP commands which change the filesystem are allowed or not.           |
+| `vsftpd_syslog_enable`        | true    | If enabled, log output goes to the system log (`journalctl -u vsftpd.service`)              |
+| `vsftpd_write_enable`         | true    | Controls whether any FTP commands which change the filesystem are allowed or not.           |
 
+Vsftpd options not provided in the list above can be added with `vsftpd_options` as a list of dicts with two fields, `key` and `value`. **Remark** that boolean options should be specified with `'YES'` or `'NO` *within quotes*. Otherwise the Jinja template engine will translate this into its own boolean representation, "True" and "False", respectively.
+
+```Yaml
+vsftpd_options:
+  - key: xferlog_enable
+    value: 'YES'
+  - key: xferlog_file
+    value: /var/log/vsftp_xfer.log
+```
 
 ## Dependencies
 
