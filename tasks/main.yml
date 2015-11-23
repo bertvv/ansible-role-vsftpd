@@ -60,5 +60,6 @@
     group: root
     mode: '0600'
     setype: etc_t
+    validate: 'vsftpd -olisten=NO %s'
   notify: restart vsftpd
   tags: vsftpd
