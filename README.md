@@ -1,14 +1,16 @@
 # Ansible role `vsftpd`
 
-An Ansible role for setting up Vsftpd under CentOS/RHEL 7. Specifically, the responsibilities of this role are to:
+[![Build Status](https://travis-ci.org/bertvv/ansible-role-vsftpd.svg?branch=master)](https://travis-ci.org/bertvv/ansible-role-vsftpd)
+
+An Ansible role for setting up Vsftpd under CentOS/RHEL 7, Ubuntu LTS 12.04 (precise), or 14.04 (trusty). Specifically, the responsibilities of this role are to:
 
 - install necessary packages
 - manage configuration
-- manage SELinux settings
+- manage SELinux settings, when it is enabled
 
-The following are out of the scope of this role:
+Configuring the firewall is outside the scope of this role. Use another role suitable for your distribution, e.g. [bertvv.el7](https://galaxy.ansible.com/detail#/role/2305).
 
-- configuring the firewall
+If you like/use this role, please consider giving it a star or reviewing it on Ansible Galaxy. Thanks!
 
 ## Requirements
 
@@ -52,6 +54,8 @@ See the [test playbook](tests/test.yml)
 
 ## Testing
 
+There are two sets of tests for this role. The role is tested automatically on all supported platforms on Travis CI. Click through on the build status emblem above.
+
 Tests for this role are provided in the form of a Vagrant environment that is kept in a separate branch, `tests`. I use [git-worktree(1)](https://git-scm.com/docs/git-worktree) to include the test code into the working directory. Instructions for running the tests:
 
 1. Fetch the tests branch: `git fetch origin tests`
@@ -63,7 +67,7 @@ You may want to change the base box into one that you like. The current one, [be
 
 ## Contributing
 
-Issues, feature requests, ideas are appreciated and can be posted in the Issues section. Pull requests are also very welcome. Preferably, create a topic branch and when submitting, squash your commits into one (with a descriptive message).
+Issues, feature requests, ideas are appreciated and can be posted in the Issues section. Pull requests are also very welcome.
 
 ## License
 
