@@ -38,7 +38,7 @@ script:
     # Run container in detached state
   - >
     sudo docker run --detach --volume="${PWD}:${role}:ro" ${run_opts}
-    ${distribution}-${version}:ansible "${init}" > "${container_id}"
+    bertvv/ansible-testing:${distribution}_${version} "${init}" > "${container_id}"
 
   # Ansible syntax check.
   - >
