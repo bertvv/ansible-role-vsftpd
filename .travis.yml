@@ -1,22 +1,28 @@
 sudo: required
 
 env:
-  - distribution: centos  # Linux distribution
-    version: 6            # Distribution version
-    init: /sbin/init      # Path to init executable (differs for SysVInit/Systemd)
-    run_opts: ""          # Additional options for running the Docker container
-  - distribution: centos
-    version: 7
-    init: /usr/lib/systemd/systemd
-    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - distribution: ubuntu
-    version: 14.04
-    init: /sbin/init
-    run_opts: ""
-  - distribution: ubuntu
-    version: 12.04
-    init: /sbin/init
-    run_opts: ""
+  global:
+    - container_id: $(mktemp)
+    - role: /etc/ansible/roles/role_under_test
+    - test_playbook: ${role}/test.yml
+
+  matrix:
+    - distribution: centos  # Linux distribution
+      version: 6            # Distribution version
+      init: /sbin/init      # Path to init executable (differs for SysVInit/Systemd)
+      run_opts: ""          # Additional options for running the Docker container
+    - distribution: centos
+      version: 7
+      init: /usr/lib/systemd/systemd
+      run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    - distribution: ubuntu
+      version: 14.04
+      init: /sbin/init
+      run_opts: ""
+    - distribution: ubuntu
+      version: 12.04
+      init: /sbin/init
+      run_opts: ""
 
 services:
   - docker
@@ -27,14 +33,6 @@ before_install:
   - sudo docker pull bertvv/ansible-testing:${distribution}_${version}
 
 script:
-  #
-  # Run test playbook
-  #
-
-  - container_id=$(mktemp)
-  - role=/etc/ansible/roles/role_under_test
-  - test_playbook=${role}/test.yml
-
     # Run container in detached state
   - >
     sudo docker run --detach --volume="${PWD}:${role}:ro" ${run_opts}
