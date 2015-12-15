@@ -13,10 +13,19 @@
   tags: vsftpd
 
 - name: Install packages
+  apt:
+    pkg: '{{ item }}'
+    state: installed
+  with_items: vsftpd_packages
+  when: ansible_os_family == 'Debian'
+  tags: vsftpd
+
+- name: Install packages
   yum:
     pkg: '{{ item }}'
     state: installed
   with_items: vsftpd_packages
+  when: ansible_os_family == 'RedHat'
   tags: vsftpd
 
 - name: Set SELinux booleans
