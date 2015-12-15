@@ -29,6 +29,7 @@ local_root={{ vsftpd_local_root }}
 local_umask={{ vsftpd_local_umask }}
 
 write_enable={{ 'YES' if vsftpd_write_enable else 'NO' }}
+seccomp_sandbox=NO
 
 {% if vsftpd_options is defined %}
 #

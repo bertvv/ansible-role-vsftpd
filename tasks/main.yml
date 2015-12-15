@@ -12,32 +12,11 @@
     - default.yml
   tags: vsftpd
 
-- name: Install packages
-  apt:
-    pkg: '{{ item }}'
-    state: installed
-  with_items: vsftpd_packages
-  when: ansible_os_family == 'Debian'
-  tags: vsftpd
+- include: install-Debian.yml
+  when: ansible_os_family == "Debian"
 
-- name: Install packages
-  yum:
-    pkg: '{{ item }}'
-    state: installed
-  with_items: vsftpd_packages
-  when: ansible_os_family == 'RedHat'
-  tags: vsftpd
-
-- name: Set SELinux booleans
-  seboolean:
-    name: '{{ item }}'
-    state: yes
-    persistent: yes
-  when: ansible_os_family == 'RedHat'
-  with_items:
-    - ftp_home_dir
-    - ftpd_full_access
-  tags: vsftpd
+- include: install-RedHat.yml
+  when: ansible_os_family == "RedHat"
 
 - name: Ensure service is started
   service:
