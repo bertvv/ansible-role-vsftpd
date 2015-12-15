@@ -1,0 +1,27 @@
+# roles/vsftpd/tasks/selinux.yml
+---
+
+- name: Determine if SElinux is installed
+  shell: which getenforce || exit 0
+  register: selinux_installed
+  changed_when: false
+  tags: vsftpd
+
+- name: Determine if SElinux is enabled
+  shell: getenforce
+  register: selinux_mode
+  when: selinux_installed.stdout != ""
+  ignore_errors: true
+  changed_when: false
+  tags: vsftpd
+
+- name: Set SELinux booleans
+  seboolean:
+    name: '{{ item }}'
+    state: yes
+    persistent: yes
+  with_items:
+    - ftp_home_dir
+    - ftpd_full_access
+  when: selinux_installed.stdout != "" and not 'Disabled' in selinux_mode.stdout
+  tags: vsftpd

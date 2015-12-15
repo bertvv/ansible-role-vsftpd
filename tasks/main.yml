@@ -18,6 +18,8 @@
 - include: install-RedHat.yml
   when: ansible_os_family == "RedHat"
 
+- include: selinux.yml
+
 - name: Ensure service is started
   service:
     name: '{{ vsftpd_service }}'

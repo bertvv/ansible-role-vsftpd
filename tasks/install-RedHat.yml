@@ -8,20 +8,3 @@
   with_items: vsftpd_packages
   tags: vsftpd
 
-- name: Determine SELinux mode
-  shell: getenforce
-  register: selinux_mode
-
-- debug:
-    msg: "SElinux mode: {{ selinux_mode.stdout }}"
-
-- name: Set SELinux booleans
-  seboolean:
-    name: '{{ item }}'
-    state: yes
-    persistent: yes
-  with_items:
-    - ftp_home_dir
-    - ftpd_full_access
-  when: not 'Disabled' in selinux_mode.stdout
-  tags: vsftpd
