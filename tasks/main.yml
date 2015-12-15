@@ -6,6 +6,12 @@
     that: "vsftpd_listen != vsftpd_listen_ipv6"
   tags: vsftpd
 
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}.yml"
+    - default.yml
+  tags: vsftpd
+
 - name: Install packages
   yum:
     pkg: '{{ item }}'
@@ -18,6 +24,7 @@
     name: '{{ item }}'
     state: yes
     persistent: yes
+  when: ansible_os_family == 'RedHat'
   with_items:
     - ftp_home_dir
     - ftpd_full_access
@@ -55,11 +62,11 @@
 - name: Install configuration file
   template:
     src:   etc_vsftpd_vsftpd.conf.j2
-    dest: /etc/vsftpd/vsftpd.conf
+    dest: "{{ vsftpd_config_file }}"
     owner: root
     group: root
     mode: '0600'
     setype: etc_t
-    validate: 'vsftpd -olisten=NO %s'
+    #validate: 'vsftpd -olisten=NO %s'
   notify: restart vsftpd
   tags: vsftpd

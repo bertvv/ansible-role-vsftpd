@@ -1,0 +1,9 @@
+# roles/vsftpd/vars/Debian.yml
+---
+
+vsftpd_packages:
+  - vsftpd
+
+vsftpd_service: vsftpd
+
+vsftpd_config_file: /etc/vsftpd.conf
