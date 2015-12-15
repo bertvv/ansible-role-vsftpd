@@ -1,0 +1,19 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    vsftpd_anon_root: /srv/shares
+    vsftpd_local_enable: true
+    vsftpd_local_root: /srv/shares
+    vsftpd_options:
+      - key: delete_failed_uploads
+        value: 'YES'
+      - key: ftpd_banner
+        value: "Welcome to the FTP service"
+  roles:
+    - vsftpd
+  post_tasks:
+    - name: Put a demo file in the shared directory
+      copy:
+        dest: '{{ vsftpd_anon_root }}/README'
+        content: 'Welcome to the FTP service at {{ ansible_fqdn }}!'
