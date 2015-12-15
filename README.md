@@ -34,7 +34,7 @@ Please refer to the [vsftpd.conf(5)](http://vsftpd.beasts.org/vsftpd_conf.html) 
 | `vsftpd_syslog_enable`        | true    | If enabled, log output goes to the system log (`journalctl -u vsftpd.service`)              |
 | `vsftpd_write_enable`         | true    | Controls whether any FTP commands which change the filesystem are allowed or not.           |
 
-Vsftpd options not provided in the list above can be added with `vsftpd_options` as a list of dicts with two fields, `key` and `value`. **Remark** that boolean options should be specified with `'YES'` or `'NO` *within quotes*. Otherwise the Jinja template engine will translate this into its own boolean representation, "True" and "False", respectively.
+Vsftpd options not provided in the list above can be added with `vsftpd_options` as a list of dicts with two fields, `key` and `value`. **Remark** that boolean options should be specified with `'YES'` or `'NO` *within quotes*. Otherwise the Jinja template engine will interpret these values as booleans instead of strings an translate them into, "True" and "False", respectively.
 
 ```Yaml
 vsftpd_options:
@@ -56,14 +56,18 @@ See the [test playbook](tests/test.yml)
 
 There are two sets of tests for this role. The role is tested automatically on all supported platforms on Travis CI. Click through on the build status emblem above.
 
-Tests for this role are provided in the form of a Vagrant environment that is kept in a separate branch, `tests`. I use [git-worktree(1)](https://git-scm.com/docs/git-worktree) to include the test code into the working directory. Instructions for running the tests:
+You can also run tests for this role locally in a Vagrant environment that is kept in a separate branch, `tests`. I use [git-worktree(1)](https://git-scm.com/docs/git-worktree) to include the test code into the working directory. Instructions for running the tests:
 
 1. Fetch the tests branch: `git fetch origin tests`
 2. Create a Git worktree for the test code: `git worktree add tests tests` (remark: this requires at least Git v2.5.0). This will create a directory `tests/`.
 3. `cd tests/`
-4. `vagrant up` will then create a VM and apply a test playbook (`test.yml`).
+4. `vagrant up` will then create VMs and apply a test playbook (`test.yml`). Currently, Ubuntu 14.04 and CentOS 7 are tested.
+5. Running the script `./acceptance_tests.sh` will check if the servers actually serve files, both anonymously, and as a registered user.
 
-You may want to change the base box into one that you like. The current one, [bertvv/centos71](https://atlas.hashicorp.com/bertvv/boxes/centos71) was generated using a Packer template from the [Boxcutter project](https://github.com/boxcutter/centos) with a few modifications.
+The tests are run on the following platforms:
+
+- CentOS 7, with base box [bertvv/centos71](https://atlas.hashicorp.com/bertvv/boxes/centos71), generated using a Packer template from the [Boxcutter project](https://github.com/boxcutter/centos) with a few modifications;
+- Ubuntu 14.04, with base box ubuntu/trusty64 (official)
 
 ## Contributing
 
