@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Bert Van Vreckem
-  description: PURPOSE
+  description: "An Ansible role for setting up Vsftpd under CentOS/RHEL 7, Ubuntu LTS 12.04 (precise), or 14.04 (trusty)"
   company:
   license: BSD
   min_ansible_version: 1.7
