@@ -12,11 +12,11 @@
     - default.yml
   tags: vsftpd
 
-- include: install-Debian.yml
-  when: ansible_os_family == "Debian"
-
-- include: install-RedHat.yml
-  when: ansible_os_family == "RedHat"
+- name: Install Vsftpd
+  package:
+    name: '{{ vsftpd_packages }}'
+    state: present
+  tags: vsftpd
 
 - include: selinux.yml
 
