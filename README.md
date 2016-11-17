@@ -8,7 +8,7 @@ An Ansible role for setting up Vsftpd under CentOS/RHEL 7, Ubuntu LTS 12.04 (pre
 - manage configuration
 - manage SELinux settings, when it is enabled
 
-Configuring the firewall is outside the scope of this role. Use another role suitable for your distribution, e.g. [bertvv.el7](https://galaxy.ansible.com/detail#/role/2305).
+Configuring the firewall is outside the scope of this role. Use another role suitable for your distribution, e.g. [bertvv.rh-base](https://galaxy.ansible.com/bertvv/rh-base).
 
 If you like/use this role, please consider giving it a star or reviewing it on Ansible Galaxy. Thanks!
 
