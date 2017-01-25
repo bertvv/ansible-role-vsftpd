@@ -50,7 +50,7 @@ No dependencies.
 
 ## Example Playbook
 
-See the [test playbook](tests/test.yml)
+See the [test playbook](test.yml)
 
 ## Testing
 
