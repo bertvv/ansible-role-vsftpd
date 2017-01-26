@@ -12,5 +12,5 @@
 # Compiled Python
 *.pyc
 
-# Test directory (sits in a separate branch)
-tests/
+# Test directory/-ies (sits in a separate branch)
+*-tests/
