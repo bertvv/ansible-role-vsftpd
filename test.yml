@@ -1,7 +1,23 @@
-# Test playbook for Ansible role bertvv.ROLENAME
 ---
-
 - hosts: all
   become: true
+  vars:
+    vsftpd_anon_root: /srv/shares/public
+    vsftpd_local_enable: true
+    vsftpd_local_root: /srv/shares/private
+    vsftpd_options:
+      - key: delete_failed_uploads
+        value: 'YES'
+      - key: ftpd_banner
+        value: "Welcome to the FTP service"
   roles:
-    - role_under_test
+    - vsftpd
+  post_tasks:
+    - name: Put a demo file in the anonymous directory
+      copy:
+        dest: '{{ vsftpd_anon_root }}/README'
+        content: 'anon_root'
+    - name: Put a demo file in the user directory
+      copy:
+        dest: '{{ vsftpd_local_root }}/README'
+        content: 'local_root'
