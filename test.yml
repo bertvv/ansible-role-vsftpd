@@ -21,3 +21,9 @@
       copy:
         dest: '{{ vsftpd_local_root }}/README'
         content: 'local_root'
+    - name: Add user for testing authenticated access
+      user:
+        name: alice
+        state: present
+        password: '$6$OfxvyTsMWVuj1rCY$GW689Q8mVlz8l/mMs1eX701xzOmL2doNlRLvjJ6tTrSgc5W/DTcBBZxqZZomEefX9puiRHtyCGI1HLd72hfQB1'
+        # alice
