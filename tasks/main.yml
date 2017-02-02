@@ -58,5 +58,6 @@
     mode: '0600'
     setype: etc_t
     #validate: 'vsftpd -olisten=NO %s'
+    #  validation always exits with status 1, even if everything seems ok
   notify: restart vsftpd
   tags: vsftpd
