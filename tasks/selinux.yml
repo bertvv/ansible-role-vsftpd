@@ -1,27 +1,30 @@
 # roles/vsftpd/tasks/selinux.yml
 ---
 
-- name: Determine if SElinux is installed
-  shell: which getenforce || exit 0
-  register: selinux_installed
-  changed_when: false
-  tags: vsftpd
-
-- name: Determine if SElinux is enabled
-  shell: getenforce
-  register: selinux_mode
-  when: selinux_installed.stdout != ""
-  ignore_errors: true
-  changed_when: false
-  tags: vsftpd
-
-- name: Set SELinux booleans
+- name: Allow full read/write access through SELinux
   seboolean:
-    name: '{{ item }}'
+    name: ftpd_full_access
     state: yes
     persistent: yes
-  with_items:
-    - ftp_home_dir
-    - ftpd_full_access
-  when: selinux_installed.stdout != "" and not 'Disabled' in selinux_mode.stdout
+  when: ansible_selinux is defined and ansible_selinux.status == 'enabled'
   tags: vsftpd
+
+  # in RHEL/CentOS 7.3, the SELinux boolean ftp_home_dir was removed and
+  # access to home directories is enabled by default
+  # See https://bugzilla.redhat.com/show_bug.cgi?id=1352257
+- name: Check if ftp_home_dir exists
+  shell: getsebool -a | grep '^ftp_home_dir\b'
+  register: var_exists
+  failed_when: false
+  changed_when: false
+  when: ansible_selinux is defined and ansible_selinux.status == 'enabled'
+  tags: vsftpd
+
+- name: Allow access to home directories
+  seboolean:
+    name: ftp_home_dir
+    state: yes
+    persistent: yes
+  when: ansible_selinux is defined and ansible_selinux.status == 'enabled' and var_exists.status == 0
+  tags: vsftpd
+
