@@ -2,6 +2,14 @@
 
 This file contains al notable changes to the bertvv.vsftpd Ansible role. This file adheres to the guidelines of [http://keepachangelog.com/](http://keepachangelog.com/). Versioning follows [Semantic Versioning](http://semver.org/).
 
+## 2.0.1 - 2017-02-03
+
+### Changed
+
+- (GH-3) Only enable SELinux boolean ftp_home_dir when it is present
+- Added Vagrant and Docker test branches
+- Added support for Fedora 25
+
 ## 2.0.0 - 2016-11-17
 
 ### Changed
