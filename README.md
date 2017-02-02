@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bertvv/ansible-role-vsftpd.svg?branch=master)](https://travis-ci.org/bertvv/ansible-role-vsftpd)
 
-An Ansible role for setting up Vsftpd under CentOS/RHEL 7, Ubuntu LTS 12.04 (precise), or 14.04 (trusty). Specifically, the responsibilities of this role are to:
+An Ansible role for setting up Vsftpd under CentOS/RHEL 7, Fedora 25, Ubuntu LTS 12.04 (precise), or 14.04 (trusty). Specifically, the responsibilities of this role are to:
 
 - install necessary packages
 - manage configuration
