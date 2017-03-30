@@ -69,7 +69,7 @@ configure_environment() {
       init=/usr/lib/systemd/systemd
       run_opts+=('--volume=/sys/fs/cgroup:/sys/fs/cgroup:ro')
       ;;
-    'ubuntu_14.04')
+    'ubuntu_14.04' | 'debian_8' )
       #run_opts+=('--volume=/sys/fs/cgroup:/sys/fs/cgroup:ro')
       # Workaround for issue when the host operating system has SELinux
       if [ -x '/usr/sbin/getenforce' ]; then
