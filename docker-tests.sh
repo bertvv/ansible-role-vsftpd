@@ -43,6 +43,7 @@ main() {
   start_container
 
   run_syntax_check
+  show_ansible_variables
   run_test_playbook
   run_idempotence_test
 
@@ -144,6 +145,11 @@ run_syntax_check() {
   log 'Running syntax check on playbook'
   exec_container ansible-playbook "${test_playbook}" --syntax-check
   log 'Syntax check finished'
+}
+
+show_ansible_variables() {
+  log 'Showing all variables defined by Ansible'
+  exec_container ansible all --module-name=setup
 }
 
 run_test_playbook() {
