@@ -23,6 +23,6 @@
     name: ftp_home_dir
     state: yes
     persistent: yes
-  when: var_exists.status == 0
+  when: var_exists.rc == 0
   tags: vsftpd
 
