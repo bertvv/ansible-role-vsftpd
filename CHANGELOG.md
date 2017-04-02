@@ -2,6 +2,15 @@
 
 This file contains al notable changes to the bertvv.vsftpd Ansible role. This file adheres to the guidelines of [http://keepachangelog.com/](http://keepachangelog.com/). Versioning follows [Semantic Versioning](http://semver.org/).
 
+## 2.0.2 - 2017-04-02
+
+### Changed
+
+- (GH-4) Fixed testing for SELinux status
+- Added Debian Jessie to the list of supported platforms
+
+Ubuntu 14.04 and 16.04 should also work, but the Docker tests still fail.
+
 ## 2.0.1 - 2017-02-03
 
 ### Changed
