@@ -2,6 +2,17 @@
 
 This file contains al notable changes to the bertvv.vsftpd Ansible role. This file adheres to the guidelines of [http://keepachangelog.com/](http://keepachangelog.com/). Versioning follows [Semantic Versioning](http://semver.org/).
 
+## 2.1.0 - 2017-11-10
+
+## Added
+
+- Role variables `vsftpd_owner`, `vsftpd_group`, for setting the owner of `local_root` and `anon_root`.
+- Role variable `vsftpd_mode` for setting the file permissions of `local_root` and `anon_root`.
+
+### Changed
+
+- Fix Ansible 2.4 deprecation warnings
+
 ## 2.0.2 - 2017-04-02
 
 ### Changed
