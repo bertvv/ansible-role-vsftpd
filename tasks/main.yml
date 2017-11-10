@@ -32,9 +32,9 @@
   file:
     path: '{{ vsftpd_anon_root }}'
     state: directory
-    owner: root
-    group: root
-    mode: '0775'
+    owner: '{{ vsftpd_owner }}'
+    group: '{{ vsftpd_group }}'
+    mode: '{{ vsftpd_mode }}'
     setype: '{{ vsftpd_setype }}'
   when: vsftpd_anon_root is defined
   tags: vsftpd
@@ -43,9 +43,9 @@
   file:
     path: '{{ vsftpd_local_root }}'
     state: directory
-    owner: root
-    group: root
-    mode: '0775'
+    owner: '{{ vsftpd_owner }}'
+    group: '{{ vsftpd_group }}'
+    mode: '{{ vsftpd_mode }}'
     setype: '{{ vsftpd_setype }}'
   when: vsftpd_local_root is defined
   tags: vsftpd
@@ -54,10 +54,7 @@
   template:
     src:   etc_vsftpd_vsftpd.conf.j2
     dest: "{{ vsftpd_config_file }}"
-    owner: root
-    group: root
     mode: '0600'
-    setype: etc_t
     #validate: 'vsftpd -olisten=NO %s'
     #  validation always exits with status 1, even if everything seems ok
   notify: restart vsftpd
