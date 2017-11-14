@@ -58,7 +58,7 @@ See the test playbooks in either the [Vagrant](https://github.com/bertvv/ansible
 
 There are two types of test environments available. One powered by Vagrant, another by Docker. The latter is suitable for running automated tests on Travis-CI. Test code is kept in separate orphan branches. For details of how to set up these test environments on your own machine, see the README files in the respective branches:
 
-- Vagrant: [tests](https://github.com/bertvv/ansible-role-vsftpd/tree/tests)
+- Vagrant: [vagrant-tests](https://github.com/bertvv/ansible-role-vsftpd/tree/vagrant-tests)
 - Docker: [docker-tests](https://github.com/bertvv/ansible-role-vsftpd/tree/docker-tests)
 
 ## Contributing
