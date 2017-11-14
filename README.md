@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bertvv/ansible-role-vsftpd.svg?branch=master)](https://travis-ci.org/bertvv/ansible-role-vsftpd)
 
-An Ansible role for setting up Vsftpd under CentOS/RHEL 7, Fedora 25, Ubuntu LTS 12.04 (precise) / 14.04 (trusty), or Debian 8 (Jessie). Specifically, the responsibilities of this role are to:
+An Ansible role for setting up Vsftpd under CentOS/RHEL 6-7, Fedora 26, Ubuntu LTS 12.04 (precise) / 14.04 (trusty), or Debian 8 (Jessie) and 9 (Stretch). Specifically, the responsibilities of this role are to:
 
 - install necessary packages
 - manage configuration
@@ -10,7 +10,7 @@ An Ansible role for setting up Vsftpd under CentOS/RHEL 7, Fedora 25, Ubuntu LTS
 
 Configuring the firewall is outside the scope of this role. Use another role suitable for your distribution, e.g. [bertvv.rh-base](https://galaxy.ansible.com/bertvv/rh-base).
 
-If you like/use this role, please consider giving it a star. Thanks!
+**If you like/use this role, please consider giving it a star. Thanks!**
 
 ## Requirements
 
@@ -74,4 +74,5 @@ Pull requests are also very welcome. The best way to submit a PR is by first cre
 ## Contributors
 
 - [Bert Van Vreckem](https://github.com/bertvv/) (maintainer)
+- 
 
