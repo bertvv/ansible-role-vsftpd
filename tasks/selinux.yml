@@ -8,6 +8,7 @@
     persistent: yes
   tags: vsftpd
   when:
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version >= "7"
 
 - name: Allow full read/write access through SELinux for el6
@@ -17,6 +18,7 @@
     persistent: yes
   tags: vsftpd
   when:
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == "6"
 
   # in RHEL/CentOS 7.3, the SELinux boolean ftp_home_dir was removed and
