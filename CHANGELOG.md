@@ -8,6 +8,7 @@ This file contains al notable changes to the bertvv.vsftpd Ansible role. This fi
 
 - Role variables `vsftpd_owner`, `vsftpd_group`, for setting the owner of `local_root` and `anon_root`.
 - Role variable `vsftpd_mode` for setting the file permissions of `local_root` and `anon_root`.
+- (GH-5) Support for CentOS 6 (credit: @renux360)
 
 ### Changed
 
