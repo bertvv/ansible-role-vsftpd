@@ -74,5 +74,5 @@ Pull requests are also very welcome. The best way to submit a PR is by first cre
 ## Contributors
 
 - [Bert Van Vreckem](https://github.com/bertvv/) (maintainer)
-- 
+- [renux360](https://github.com/renux360)
 
