@@ -1,12 +1,23 @@
 # roles/vsftpd/tasks/selinux.yml
 ---
 
-- name: Allow full read/write access through SELinux
+- name: Allow full read/write access through SELinux for el7+
   seboolean:
     name: ftpd_full_access
     state: yes
     persistent: yes
   tags: vsftpd
+  when:
+   - ansible_distribution_major_version >= "7"
+
+- name: Allow full read/write access through SELinux for el6
+  seboolean:
+    name: allow_ftpd_full_access
+    state: yes
+    persistent: yes
+  tags: vsftpd
+  when:
+   - ansible_distribution_major_version == "6"
 
   # in RHEL/CentOS 7.3, the SELinux boolean ftp_home_dir was removed and
   # access to home directories is enabled by default
