@@ -6,7 +6,8 @@
     that: "vsftpd_listen != vsftpd_listen_ipv6"
   tags: vsftpd
 
-- include_vars: "{{ item }}"
+- name: Include OS-specific variables
+  include_vars: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
