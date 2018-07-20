@@ -21,13 +21,6 @@
 - include_tasks: selinux.yml
   when: ansible_selinux is defined and ansible_selinux != false and ansible_selinux.status == 'enabled'
 
-- name: Ensure service is started
-  service:
-    name: '{{ vsftpd_service }}'
-    state: started
-    enabled: true
-  tags: vsftpd
-
 - name: Ensure `anon_root` exists
   file:
     path: '{{ vsftpd_anon_root }}'
@@ -58,4 +51,11 @@
     #validate: 'vsftpd -olisten=NO %s'
     #  validation always exits with status 1, even if everything seems ok
   notify: restart vsftpd
+  tags: vsftpd
+
+- name: Ensure service is started
+  service:
+    name: '{{ vsftpd_service }}'
+    state: started
+    enabled: true
   tags: vsftpd
