@@ -59,3 +59,14 @@
     #  validation always exits with status 1, even if everything seems ok
   notify: restart vsftpd
   tags: vsftpd
+
+- name: Add extra (ACL) permissions
+  acl:
+    name: "{{ item.folder }}"
+    entity: "{{ item.entity }}"
+    etype: "{{ item.etype }}"
+    permissions: "{{ item.permissions }}"
+    state: present
+  with_items: "{{ vsftpd_extra_permissions }}"
+  when: vsftpd_extra_permissions is defined
+  tags: vsftpd
