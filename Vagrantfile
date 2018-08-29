@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = 'test.yml'
     ansible.host_vars = {
       # bento/fedora-26 does not have Python 2.7 installed
-      ftpfedora: { ansible_python_interpreter: '/usr/bin/python3' }
+      ROLE_NAME + 'fedora' => { ansible_python_interpreter: '/usr/bin/python3' }
     }
   end
 end
