@@ -46,6 +46,17 @@ vsftpd_options:
     value: /var/log/vsftp_xfer.log
 ```
 
+Since vsftpd is dependent on fixed ACL permissions on the system this is in most cases easy to set but there are cases where a specific group needs access to some folders that can't be set when simply using chmod. In this case it is needed to add some extra read/write permissions for the specific user/group.
+For this scenario it is possible to use the underlying variables in your playbook which will set these extra ACL entries.
+
+```Yaml
+vsftpd_extra_permissions:
+  - folder: "/srv/shares/sales"
+    entity: "management"
+    etype: "group"
+    permissions: "r-x"
+```
+
 ## Dependencies
 
 No dependencies.
@@ -75,4 +86,4 @@ Pull requests are also very welcome. The best way to submit a PR is by first cre
 
 - [Bert Van Vreckem](https://github.com/bertvv/) (maintainer)
 - [renux360](https://github.com/renux360)
-
+- [Jens Van Deynse](https://github.com/JensVanDeynse1994)
