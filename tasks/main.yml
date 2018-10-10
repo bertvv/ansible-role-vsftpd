@@ -6,7 +6,8 @@
     that: "vsftpd_listen != vsftpd_listen_ipv6"
   tags: vsftpd
 
-- include_vars: "{{ item }}"
+- name: Include OS-specific variables
+  include_vars: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
@@ -20,13 +21,6 @@
 
 - include_tasks: selinux.yml
   when: ansible_selinux is defined and ansible_selinux != false and ansible_selinux.status == 'enabled'
-
-- name: Ensure service is started
-  service:
-    name: '{{ vsftpd_service }}'
-    state: started
-    enabled: true
-  tags: vsftpd
 
 - name: Ensure `anon_root` exists
   file:
@@ -69,4 +63,11 @@
     state: present
   with_items: "{{ vsftpd_extra_permissions }}"
   when: vsftpd_extra_permissions is defined
+  tags: vsftpd
+
+- name: Ensure service is started
+  service:
+    name: '{{ vsftpd_service }}'
+    state: started
+    enabled: true
   tags: vsftpd
